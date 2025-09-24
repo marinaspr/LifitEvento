@@ -1,0 +1,45 @@
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="LifitEvent.Views.ListaEventoPage"
+    Title="Eventos">
+
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Novo"
+                     Command="{Binding NovoCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <RefreshView Command="{Binding CarregarEventosCommand}" IsRefreshing="False">
+        <CollectionView ItemsSource="{Binding Eventos}" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5" CornerRadius="15" BorderColor="#ddd">
+                        <VerticalStackLayout Spacing="5">
+
+                            <Image Source="{Binding ImagemUrl}" HeightRequest="150" Aspect="AspectFill"/>
+
+                            <Label Text="{Binding Titulo}" FontAttributes="Bold" FontSize="16"/>
+                            <Label Text="{Binding Descricao}" LineBreakMode="TailTruncation" MaxLines="2"/>
+                            <Label Text="{Binding Data, StringFormat='{0:dd/MM/yyyy}'}"/>
+                            <Label Text="{Binding Horario, StringFormat='{0:hh\\:mm}'}"/>
+                            <Label Text="{Binding Local}" FontAttributes="Italic"/>
+
+                            <HorizontalStackLayout Spacing="10">
+                                <Button Text="Editar"
+                                        Command="{Binding BindingContext.EditarCommand, Source={x:Reference EventoPage}}"
+                                        CommandParameter="{Binding}" />
+
+                                <Button Text="Excluir"
+                                        Command="{Binding BindingContext.ExcluirCommand, Source={x:Reference EventoPage}}"
+                                        CommandParameter="{Binding}"
+                                        BackgroundColor="Red"
+                                        TextColor="White"/>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>

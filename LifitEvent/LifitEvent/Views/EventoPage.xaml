@@ -1,0 +1,34 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LifitEvent.Views.EventoPage"
+             Title="Evento">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Descrição do evento" FontAttributes="Bold"/>
+
+            <Entry Placeholder="Título" Text="{Binding Evento.Titulo}"/>
+            <Editor Placeholder="Descrição"
+                    Text="{Binding Evento.Descricao}"
+                    AutoSize="TextChanges"/>
+
+            <Label Text="Dados do evento" FontAttributes="Bold"/>
+
+            <DatePicker Date="{Binding Evento.Data}" />
+            <TimePicker Time="{Binding Evento.Horario}" />
+            <Entry Placeholder="Local" Text="{Binding Evento.Local}"/>
+
+            <Button Text="Salvar"
+                    Command="{Binding SalvarCommand}"
+                    BackgroundColor="#90E05E"
+                    TextColor="White"/>
+
+            <Button Text="Excluir"
+                    Command="{Binding ExcluirCommand}"
+                    BackgroundColor="Red"
+                    TextColor="White"
+                    IsVisible="{Binding Evento.Id, Converter={StaticResource IntToBoolConverter}}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
